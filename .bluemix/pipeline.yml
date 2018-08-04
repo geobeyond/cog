@@ -1,0 +1,69 @@
+---
+stages:
+- name: Build Stage
+  inputs:
+  - type: git
+    branch: master
+    service: ${REPO}
+  triggers:
+  - type: commit
+  properties:
+  - name: CHART_NAME
+    value: ${CHART_NAME}
+    type: text
+  jobs:
+  - name: Build
+    type: builder
+    build_type: cr
+    artifact_dir: ''
+    target:
+      region_id: ${REGION_ID}
+      api_key: ${API_KEY}
+    namespace: ${REGISTRY_NAMESPACE}
+    image_name: ${CHART_NAME}
+    script: |-
+      #!/bin/bash
+
+      echo "source the container_build script to run in current shell"
+      SCRIPTS_DIR=.bluemix/scripts # SCRIPTS_DIR is used in container_build.sh
+      source ${SCRIPTS_DIR}/container_build.sh
+
+      if  [[ -f post_build.sh ]]; then
+        chmod +x post_build.sh;
+        echo "executing the post_build script";
+        sh post_build.sh;
+      else
+        echo "the post_build script does not exist";
+      fi
+- name: Deploy Stage
+  inputs:
+  - type: job
+    stage: Build Stage
+    job: Build
+  properties:
+  - name: buildProperties
+    value: build.properties
+    type: file
+  - name: CHART_NAME
+    value: ${CHART_NAME}
+    type: text
+  - name: CLUSTER_NAMESPACE
+    value: ${CLUSTER_NAMESPACE}
+    type: text
+  - name: IMAGE_REGISTRY_TOKEN
+    value: ${IMAGE_REGISTRY_TOKEN}
+    type: text
+  triggers:
+  - type: stage
+  jobs:
+  - name: Deploy
+    type: deployer
+    target:
+      region_id: ${REGION_ID}
+      application: ${CF_APP}
+      api_key: ${API_KEY}
+      kubernetes_cluster: ${KUBE_CLUSTER_NAME}
+    script: |-
+      #!/bin/bash
+      echo "source the kube_deploy script to run in current shell"
+      source .bluemix/scripts/kube_deploy.sh

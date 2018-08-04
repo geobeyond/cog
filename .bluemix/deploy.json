@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Sample Deploy Stage",
+  "longDescription": "The Delivery Pipeline automates continuous deployment.",
+  "type": "object",
+  "properties": {
+    "api-key": {
+      "description": "The IBM Cloud API key is used to access the IBM Container Service API and interact with the cluster. You can obtain your API key with 'bx iam api-key-create' or via the console at https://console.bluemix.net/iam/#/apikeys by clicking **Create API key** (Each API key only can be viewed once).",
+      "type": "string"
+    },
+    "image-registry-token": {
+      "description": "Container Registry access token. Retrievable via [bx cr tokens]",
+      "type": "string"
+    },
+    "kube-cluster-name": {
+      "description": "Your cluster name. Retrieve it with [bx cs clusters] or via the console at https://console.bluemix.net/containers-kubernetes/home/clusters.",
+      "type": "string"
+    },
+    "dev-region": {
+      "description": "The IBM Cloud region",
+      "type": "string"
+    },
+    "app-name": {
+      "description": "app name",
+      "type": "string"
+    }
+  },
+  "required": ["dev-region",  "app-name", "api-key", "image-registry-token", "image-pull-secret-name", "kube-cluster-name"],
+  "form": [{
+    "type": "validator",
+    "url": "/devops/setup/bm-helper/helper.html"
+  },
+  {
+    "type": "password",
+    "readonly": false,
+    "title": "IBM Cloud API Key",
+    "key": "api-key"
+  }, {
+    "type": "password",
+    "readonly": false,
+    "title": "Container Registry access token",
+    "key": "image-registry-token"
+  }, {
+    "type": "text",
+    "readonly": false,
+    "title": "Kubernetes Cluster Name",
+    "key": "kube-cluster-name"
+  },
+  {
+    "type": "text",
+    "readonly": false,
+    "title": "App Name",
+    "key": "app-name"
+  }, {
+    "type": "table",
+    "columnCount": 1,
+    "widths": ["28%"],
+    "items": [{
+      "type": "label",
+      "title": "Region"
+    }, {
+      "type": "select",
+      "key": "dev-region"
+    }]
+  }]
+}

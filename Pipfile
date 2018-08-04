@@ -1,0 +1,17 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[dev-packages]
+
+
+[packages]
+livereload ='*'
+ibmcloudenv ='~=0.0'
+Django = "==1.11.8"
+gunicorn = "==19.7.1"
+whitenoise= "==3.3.1"
+

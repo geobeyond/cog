@@ -1,0 +1,64 @@
+version: '2'
+template:
+  name: Continuous Delivery Toolchain
+  description: "This toolchain includes tools to develop and deploy your app. Depending on your app, when you create the toolchain, the GitHub repository will either be empty or will contain source code from your app.\n\nThis toolchain uses tools that are part of the Continuous Delivery service. If an instance of that service isn't already in your organization, when you click **Create**, it is automatically added at no cost to you. For more information and terms, see the [IBM Cloud catalog](/catalog/services/continuous-delivery/).\n\nTo get started, click **Create**."
+  required:
+    - repo
+    - build
+
+toolchain:
+  name: cogk8s
+
+services:
+  # Github repos
+  repo:
+    service_id: hostedgit
+    parameters:
+      repo_url: "{{#zip_url}}{{zip_url}}{{/zip_url}}{{^zip_url}}{{repository}}{{/zip_url}}"
+      repo_name: "{{toolchain.name}}"
+      type: clone
+      has_issues: true
+      enable_traceability: true
+
+  # Pipelines
+  build:
+    service_id: pipeline
+    parameters:
+      services: 
+        - repo
+      name: "{{name}}"
+      ui-pipeline: true
+      configuration:
+        content: 
+          $text: pipeline.yml
+        env:
+          REPO: repo
+          CF_APP: "{{form.pipeline.parameters.app-name}}"
+          CHART_NAME: "{{form.pipeline.parameters.chart-name}}"
+          KUBE_CLUSTER_NAME: "{{form.pipeline.parameters.kube-cluster-name}}"
+          CLUSTER_NAMESPACE: "{{form.pipeline.parameters.cluster-namespace}}"
+          API_KEY: "{{form.pipeline.parameters.api-key}}"
+          IMAGE_REGISTRY_TOKEN: "{{form.pipeline.parameters.image-registry-token}}"
+          REGISTRY_NAMESPACE: "{{form.pipeline.parameters.registry-namespace}}"
+          REGION_ID: "{{form.pipeline.parameters.dev-region}}"
+        execute: true
+
+  #Web IDE
+  webide:
+    service_id: orion
+
+#Deployment
+form:
+  pipeline:
+    schema: 
+      $ref: deploy.json
+    parameters:
+      app-name: cogk8s
+      dev-region: "{{region}}"
+      chart-name: cogk8s
+      kube-cluster-name: Call_for_Code_Kubernetes_Cluster
+      cluster-namespace: default
+      api-key: "{{api-key}}"
+      image-pull-secret-name: "{{image-pull-secret-name}}"
+      image-registry-token: "{{image-registry-token}}"
+      registry-namespace: cogk8s91dc13e9e88c48aab6b99d22
