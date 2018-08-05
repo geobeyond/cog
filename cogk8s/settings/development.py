@@ -2,6 +2,13 @@ from cogk8s.settings.base import *
 
 DEBUG = True
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
 INSTALLED_APPS += (
     # other apps for local development
     'minio_storage',
