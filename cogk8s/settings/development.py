@@ -3,9 +3,9 @@ from cogk8s.settings.base import *
 DEBUG = True
 
 INSTALLED_APPS += (
-                   # other apps for local development
-                   minio_storage,
-                   )
+    # other apps for local development
+    'minio_storage',
+)
 
 # Minio server
 STATIC_URL = '/static/'
