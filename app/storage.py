@@ -1,7 +1,8 @@
 from django.utils.deconstruct import deconstructible
 from minio_storage.storage import (
     MinioStorage,
-    create_minio_client_from_settings
+    create_minio_client_from_settings,
+    get_setting
 )
 
 
