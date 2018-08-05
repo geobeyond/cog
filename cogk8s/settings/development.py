@@ -11,6 +11,7 @@ DATABASES = {
 
 INSTALLED_APPS += (
     # other apps for local development
+    'rest_framework',
     'minio_storage',
 )
 
