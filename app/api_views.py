@@ -16,7 +16,13 @@ class COGListCreateView(APIView):
     parser_class = (ImageUploadParser,)
 
     def get(self, request, format=None):
-        cogs = [{"name": cog.name} for cog in COG.objects.all()]
+        cogs = [{
+            "name": cog.name,
+            "bucket_name": cog.bucket_name,
+            "resource_uri": cog.resource_uri,
+            "created_at": cog.created_at,
+            "updated_at": cog.updated_at
+        } for cog in COG.objects.all()]
         return Response(cogs)
         
 
