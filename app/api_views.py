@@ -17,6 +17,7 @@ class COGListCreateView(APIView):
 
     def get(self, request, format=None):
         cogs = [{
+            "id": cog.id,
             "name": cog.name,
             "bucket_name": cog.bucket_name,
             "resource_uri": cog.resource_uri,

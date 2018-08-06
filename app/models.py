@@ -5,6 +5,7 @@ from app.storage import MinioCogStorage
 from cogk8s.settings import development, production
 from PIL import Image
 from urllib.parse import urljoin
+import uuid
 import os
 
 class COG(models.Model):
@@ -13,6 +14,7 @@ class COG(models.Model):
 
     length = 100
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
     name = models.CharField(max_length=length, blank=False, null=False)
     image = models.FileField(
         storage=MinioCogStorage(),
