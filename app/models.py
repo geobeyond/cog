@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from app.storage import MinioCogStorage
 from cogk8s.settings import development, production
 from PIL import Image
@@ -86,11 +86,21 @@ class COG(models.Model):
             resource_uri=uri
         )
 
+    def delete_file_from_minio_storage(self):
+        try:
+             MinioCogStorage().delete(self.name)
+        except:
+            raise IOError("Resource not deleted from Minio Server.")    
+
 
 def cog_changed(instance, *args, **kwargs):
 # Comment until issue with Pillow is resolved
 #     instance.set_thumbnail()
     instance.set_bucket_name_and_resource_uri()
 
+def cog_deleted(instance, *args, **kwargs):
+    instance.delete_file_from_minio_storage()
+
 
 post_save.connect(cog_changed, sender=COG)
+post_delete.connect(cog_deleted, sender=COG)
