@@ -64,33 +64,33 @@ class COG(models.Model):
             id=self.id
         ).update(thumbnail=thumb_img)
 
-    def set_bucket_name(self):
+    def set_bucket_name_and_resource_uri(self):
         # generate bucket_name
         if 'development' in os.getenv('DJANGO_SETTINGS_MODULE'):
             bucketname = development.MINIO_STORAGE_COG_BUCKET_NAME
         else:
             bucketname = production.MINIO_STORAGE_COG_BUCKET_NAME
-        COG.objects.filter(
-            id=self.id
-        ).update(bucket_name=bucketname)
-
-    def set_resource_uri(self):
         # generate uri from minio
         if 'development' in os.getenv('DJANGO_SETTINGS_MODULE'):
             minio_baseurl = development.MINIO_STORAGE_COG_URL
         else:
             minio_baseurl = production.MINIO_STORAGE_COG_URL
-        uri = urljoin(minio_baseurl, self.name)
+        uri = urljoin(
+            minio_baseurl,
+            os.path.join(bucketname, self.name)
+        )
         COG.objects.filter(
             id=self.id
-        ).update(resource_uri=uri)
+        ).update(
+            bucket_name=bucketname,
+            resource_uri=uri
+        )
 
 
 def cog_changed(instance, *args, **kwargs):
 # Comment until issue with Pillow is resolved
 #     instance.set_thumbnail()
-    instance.set_bucket_name()
-    instance.set_resource_uri()
+    instance.set_bucket_name_and_resource_uri()
 
 
 post_save.connect(cog_changed, sender=COG)
