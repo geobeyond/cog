@@ -11,7 +11,7 @@ class ImageUploadParser(FileUploadParser):
     media_type = 'image/*'
 
 
-class COG_APIView(APIView):
+class COG_ListCreateView(APIView):
     parser_class = (ImageUploadParser,)
 
     def get(self, request, format=None):
