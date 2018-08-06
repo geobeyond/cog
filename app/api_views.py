@@ -1,4 +1,5 @@
 from .models import COG
+from PIL import Image
 import rasterio
 from rest_framework.exceptions import ParseError
 from rest_framework.parsers import FileUploadParser
@@ -47,7 +48,7 @@ class COG_ListCreateView(APIView):
             with rasterio.open(img) as dataset:
                 data_array = dataset.read() 
         except:
-            raise ParseError("Unsupported image type opened by Rasterio")
+            raise ParseError("Unsupported image type opened by Rasterio") 
 
         cog = COG.objects.create(name=name, image=img)
         cog.save()
