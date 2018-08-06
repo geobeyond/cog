@@ -6,7 +6,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(
         r'^api/cogs/$',
-        api_views.COG_ListCreateView.as_view(),
+        api_views.COGListCreateView.as_view(),
         name='cog_create'
     ),
     url(r'^health', views.health, name='health'),
