@@ -51,6 +51,10 @@ class COGListCreateView(APIView):
         img = request.data['image']
         name = request.data['name']
 
+        f_name = COG.objects.filter(name=name)
+        if f_name.count() > 0:
+            return Response(status=status.HTTP_409_CONFLICT)
+
         # try to open file with rasterio
         try:
             with rasterio.open(img) as dataset:
