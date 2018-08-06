@@ -9,7 +9,7 @@ import uuid
 import os
 
 class COG(models.Model):
-    """Design model for the Cloud Optimized Geotiff objects
+    """Model for the Cloud Optimized Geotiff objects
     """
 
     length = 100
