@@ -56,11 +56,28 @@ class COGListCreateView(APIView):
             return Response(status=status.HTTP_409_CONFLICT)
 
         # try to open file with rasterio
-        try:
-            with rasterio.open(img) as dataset:
-                data_array = dataset.read() 
-        except:
-            raise ParseError("Unsupported image type opened by Rasterio") 
+        with rasterio.open(img) as dataset:
+            is_cog = True
+            try:
+                assert dataset.driver == "GTiff"
+                assert dataset.is_tiled
+                assert dataset.overviews(1)
+            except (
+                AttributeError,
+                AssertionError,
+                KeyError
+            ) as err:
+                if err[0] or err[2]:
+                    raise ParseError(
+                        "Unsupported image type opened by Rasterio"
+                    )
+                elif err[1]:
+                    # @TODO add logging if it isn't COG
+                    is_cog = False
+            data_array = dataset.read()
+        
+        if not is_cog:
+            pass 
 
         cog = COG.objects.create(name=name, image=img)
         cog.save()
@@ -121,11 +138,28 @@ class COGDetailView(APIView):
         name = request.data['name']
 
         # try to open file with rasterio
-        try:
-            with rasterio.open(img) as dataset:
-                data_array = dataset.read() 
-        except:
-            raise ParseError("Unsupported image type opened by Rasterio") 
+        with rasterio.open(img) as dataset:
+            is_cog = True
+            try:
+                assert dataset.driver == "GTiff"
+                assert dataset.is_tiled
+                assert dataset.overviews(1)
+            except (
+                AttributeError,
+                AssertionError,
+                KeyError
+            ) as err:
+                if err[0] or err[2]:
+                    raise ParseError(
+                        "Unsupported image type opened by Rasterio"
+                    )
+                elif err[1]:
+                    # @TODO add logging if it isn't COG
+                    is_cog = False
+            data_array = dataset.read()
+        
+        if not is_cog:
+            pass
 
         cog_item = self.get_object()
         cog = COG.objects.filter(
