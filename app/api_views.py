@@ -26,7 +26,7 @@ class COGListCreateView(APIView):
             "updated_at": cog.updated_at
         } for cog in COG.objects.all()]
         return Response(cogs)
-        
+
 
     def post(self, request, format=None):
         """
@@ -34,7 +34,7 @@ class COGListCreateView(APIView):
         Example
         -------
         Example of request for creating a COG resource.
-        
+
             $   curl -X POST \
                 http://localhost:5000/api/cogs/ \
                 -u 'cog:cog' \
@@ -44,10 +44,10 @@ class COGListCreateView(APIView):
                 -F image=@/Users/geobart/example.tif \
                 -F name=example.tif
         """
-        
+
         if 'image' not in request.data.keys():
             raise ParseError("Empty content")
-        
+
         img = request.data['image']
         name = request.data['name']
 
@@ -75,7 +75,7 @@ class COGListCreateView(APIView):
                     # @TODO add logging if it isn't COG
                     is_cog = False
             data_array = dataset.read()
-        
+
         if not is_cog:
             pass 
 
@@ -112,7 +112,7 @@ class COGDetailView(APIView):
             "updated_at": cog_item.updated_at
         }
         return Response(cog)
-        
+
 
     def put(self, request, format=None, *args, **kwargs):
         """
@@ -120,7 +120,7 @@ class COGDetailView(APIView):
         Example
         -------
         Example of request for creating a COG resource.
-        
+
             $   curl -X PUT \
                 http://localhost:5000/api/cogs/<id> \
                 -u 'cog:cog' \
@@ -130,10 +130,10 @@ class COGDetailView(APIView):
                 -F image=@/Users/geobart/example.tif \
                 -F name=example.tif
         """
-        
+
         if 'image' not in request.data.keys():
             raise ParseError("Empty content")
-        
+
         img = request.data['image']
         name = request.data['name']
 
