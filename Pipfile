@@ -8,6 +8,7 @@ python_version = '3.6.2'
 
 [dev-packages]
 ipdb = "*"
+"flake8" = "*"
 
 [packages]
 livereload ='*'
