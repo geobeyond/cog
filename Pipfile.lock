@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b1248d187b9142958cd4c8f89d3eb1427f4bde5ffeff44fcf350607a489b1afe"
+            "sha256": "dacc055120a3cc54521b015d4a46b1953578f7fbd9f2d9e7393b08dc88cacf03"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -274,10 +274,10 @@
         },
         "rio-cogeo": {
             "hashes": [
-                "sha256:b137146b9451227f3571a3c113669991bc6936a157d1fcaabd6c4c2e60bae04d"
+                "sha256:d9bc704595621719d70902d7538dea42c378358877aabdede401c77444500ba5"
             ],
             "index": "pypi",
-            "version": "==1.0.dev4"
+            "version": "==1.0.dev5"
         },
         "s3transfer": {
             "hashes": [
