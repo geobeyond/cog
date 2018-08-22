@@ -1,6 +1,9 @@
 ## cog
 
-Basic Web project with Python with Django
+RESTful Web API for publishing Cloud Optimized GeoTIFF to [Minio](https://www.minio.io/)
+bucket and serving out of the box
+
+[![](http://www.cogeo.org/images/logo/Cog-02.png)](http://www.cogeo.org)
 
 [![](https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg)](https://bluemix.net)
 ![Platform](https://img.shields.io/badge/platform-DJANGO-lightgrey.svg?style=flat)
@@ -11,6 +14,7 @@ Basic Web project with Python with Django
 * [Configuration](#configuration)
 * [Run](#run)
 * [Debug](#debug)
+* [License](#license)
 
 <a name="summary"></a>
 ### Summary
@@ -90,3 +94,7 @@ bx dev debug
 #### Using your local development environment
 To debug a `django` project run `python manage.py runserver` with DEBUG set to True in settings.py to start a native django development server. This comes with the Django's stack-trace debugger, which will present runtime failure stack-traces. For more information, see [Django's documentation](https://docs.djangoproject.com/en/2.0/ref/settings/).
 
+<a name="license"></a>
+### License
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg?longCache=true&style=for-the-badge)](https://opensource.org/licenses/Apache-2.0)
