@@ -1,4 +1,5 @@
 from .models import COG
+from cogk8s.settings.development import RASTERIO_COGEO_PROFILE
 from PIL import Image
 import rasterio
 from django.shortcuts import get_object_or_404
