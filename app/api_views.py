@@ -71,7 +71,8 @@ class COGListCreateView(APIView):
         img = request.data['image']
         name = request.data['name']
 
-        f_name = COG.objects.filter(name=name)
+        cog_img_name = "cog" + "_" + name
+        f_name = COG.objects.filter(name=cog_img_name)
         if f_name.count() > 0:
             return Response(status=status.HTTP_409_CONFLICT)
 
@@ -104,7 +105,6 @@ class COGListCreateView(APIView):
                 GDAL_TIFF_OVR_BLOCKSIZE=os.environ.get("GDAL_TIFF_OVR_BLOCKSIZE", block_size),
             )
             if not is_cog:
-                cog_img_name = "cog" + "_" + name
                 cog_profile = cog_profiles.get(RASTERIO_COGEO_PROFILE)
                 cog_profile.update(dict(BIGTIFF=os.environ.get("BIGTIFF", "IF_SAFER")))
                 with MemoryFile(filename=cog_img_name) as dst:
