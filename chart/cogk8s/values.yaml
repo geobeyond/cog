@@ -3,7 +3,7 @@
 replicaCount: 1
 revisionHistoryLimit: 1
 image:
-  repository: registry.eu-de.mybluemix.net/cogk8s91dc13e9e88c48aab6b99d22/cogk8s
+  repository: registry.eu-de.mybluemix.net/cog91dc13e9e88c48aab6b99d22/cog
   tag: v1.0.0
   pullPolicy: Always
   resources:

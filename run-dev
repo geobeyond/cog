@@ -1,1 +1,1 @@
-python manage.py runserver --settings=cogk8s.settings.development
+python manage.py runserver --settings=cog.settings.development

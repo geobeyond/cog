@@ -1,4 +1,4 @@
-## cogk8s
+## cog
 
 Basic Web project with Python with Django
 

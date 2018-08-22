@@ -1,4 +1,4 @@
-from cogk8s.settings.base import *
+from cog.settings.base import *
 
 DEBUG = True
 

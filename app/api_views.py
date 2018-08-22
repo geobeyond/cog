@@ -1,5 +1,5 @@
 from .models import COG
-from cogk8s.settings.development import RASTERIO_COGEO_PROFILE
+from cog.settings.development import RASTERIO_COGEO_PROFILE
 from PIL import Image
 import rasterio
 import os
@@ -171,6 +171,7 @@ class COGDetailView(APIView):
         name = request.data['name']
 
         # try to open file with rasterio
+        # see https://github.com/mapbox/rio-glui/blob/master/rio_glui/raster.py
         with rasterio.open(img) as dataset:
             is_cog = True
             try:

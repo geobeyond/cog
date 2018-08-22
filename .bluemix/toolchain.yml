@@ -7,7 +7,7 @@ template:
     - build
 
 toolchain:
-  name: cogk8s
+  name: cog
 
 services:
   # Github repos
@@ -24,12 +24,12 @@ services:
   build:
     service_id: pipeline
     parameters:
-      services: 
+      services:
         - repo
       name: "{{name}}"
       ui-pipeline: true
       configuration:
-        content: 
+        content:
           $text: pipeline.yml
         env:
           REPO: repo
@@ -50,15 +50,15 @@ services:
 #Deployment
 form:
   pipeline:
-    schema: 
+    schema:
       $ref: deploy.json
     parameters:
-      app-name: cogk8s
+      app-name: cog
       dev-region: "{{region}}"
-      chart-name: cogk8s
+      chart-name: cog
       kube-cluster-name: Call_for_Code_Kubernetes_Cluster
       cluster-namespace: default
       api-key: "{{api-key}}"
       image-pull-secret-name: "{{image-pull-secret-name}}"
       image-registry-token: "{{image-registry-token}}"
-      registry-namespace: cogk8s91dc13e9e88c48aab6b99d22
+      registry-namespace: cog91dc13e9e88c48aab6b99d22

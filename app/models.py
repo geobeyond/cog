@@ -2,7 +2,7 @@
 from django.db import models
 from django.db.models.signals import post_save, post_delete
 from app.storage import MinioCogStorage
-from cogk8s.settings import development, production
+from cog.settings import development, production
 from PIL import Image
 from urllib.parse import urljoin
 import uuid
@@ -28,7 +28,7 @@ class COG(models.Model):
     resource_uri = models.URLField(max_length=500, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-        
+
 
     def __str__(self):
         return "{0}:{1}".format(self.bucket_name, self.name)
@@ -59,7 +59,7 @@ class COG(models.Model):
                 thumb_img.save(thumb_name)
         except:
             raise IOError("Unsupported image type")
-        
+
         COG.objects.filter(
             id=self.id
         ).update(thumbnail=thumb_img)

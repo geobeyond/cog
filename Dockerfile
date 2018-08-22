@@ -16,5 +16,5 @@ COPY . /app
 
 
 
-CMD ["gunicorn", "-b", "0.0.0.0:3000", "--env", "DJANGO_SETTINGS_MODULE=cogk8s.settings.production", "cogk8s.wsgi", "--timeout 120"]
+CMD ["gunicorn", "-b", "0.0.0.0:3000", "--env", "DJANGO_SETTINGS_MODULE=cog.settings.production", "cog.wsgi", "--timeout 120"]
 

@@ -2,9 +2,9 @@
 applications:
 - instances: 1
   timeout: 180
-  name: cogk8s
+  name: cog
   buildpack: python_buildpack
-  command: gunicorn --env DJANGO_SETTINGS_MODULE=cogk8s.settings.production cogk8s.wsgi -b 0.0.0.0:$PORT
+  command: gunicorn --env DJANGO_SETTINGS_MODULE=cog.settings.production cog.wsgi -b 0.0.0.0:$PORT
   memory: 512M
   domain: eu-de.mybluemix.net
   host: not-used
