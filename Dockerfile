@@ -12,19 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM python:2-alpine
+FROM python:3.6-alpine
 
-WORKDIR /app
+LABEL Author="francesco.bartoli@geobeyond.it"
 
-COPY requirements.txt /tmp/requirements.txt
+WORKDIR /tmp
+
+# COPY requirements.txt /tmp/requirements.txt
+COPY Pipfile /tmp/Pipfile
+COPY Pipfile.lock /tmp/Pipfile.lock
 RUN apk --update add python py-pip openssl ca-certificates py-openssl wget bash linux-headers
 RUN apk --update add --virtual build-dependencies libffi-dev openssl-dev python-dev py-pip build-base \
   && pip install --upgrade pip \
   && pip install --upgrade pipenv\
-  && pip install --upgrade -r /tmp/requirements.txt\
+#  && pip install --upgrade -r /tmp/requirements.txt\
+  && pipenv install --verbose --system --deploy\
   && apk del build-dependencies
 
 COPY . /app
+WORKDIR /app
 
 
 
