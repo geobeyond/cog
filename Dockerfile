@@ -50,5 +50,7 @@ ENV PYTHONUNBUFFERED 1
 COPY . /app
 WORKDIR /app
 
-CMD ["gunicorn", "-b", "0.0.0.0:3000", "--env", "DJANGO_SETTINGS_MODULE=cog.settings.production", "cog.wsgi", "--timeout 120"]
+ENTRYPOINT [ "/app/entrypoint.sh" ]
+
+CMD ["gunicorn", "-b", "0.0.0.0:8000", "--env", "DJANGO_SETTINGS_MODULE=cog.settings.development", "cog.wsgi", "--timeout 120"]
 
