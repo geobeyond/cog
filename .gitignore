@@ -2,3 +2,14 @@ server/localdev-config.json
 localdev-config.json
 server/localdev-config.json
 *.sqlite3
+.env
+.env.secret
+.vscode
+
+app/__pycache__/
+
+cog/__pycache__/
+
+cog/settings/__pycache__/
+
+app/migrations/__pycache__/
