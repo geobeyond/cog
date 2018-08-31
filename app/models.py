@@ -23,13 +23,21 @@ from urllib.parse import urljoin
 import uuid
 import os
 
-class COG(models.Model):
+
+class PrimaryKeyAsUUIDModel(models.Model):
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    class Meta:
+        abstract = True
+
+
+class COG(PrimaryKeyAsUUIDModel):
     """Model for the Cloud Optimized Geotiff objects
     """
 
     length = 100
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
     name = models.CharField(max_length=length, blank=False, null=False)
     image = models.FileField(
         storage=MinioCogStorage(),
@@ -103,9 +111,9 @@ class COG(models.Model):
 
     def delete_file_from_minio_storage(self):
         try:
-             MinioCogStorage().delete(self.name)
+            MinioCogStorage().delete(self.name)
         except:
-            raise IOError("Resource not deleted from Minio Server.")    
+            raise IOError("Resource not deleted from Minio Server.")
 
 
 def cog_changed(instance, *args, **kwargs):
