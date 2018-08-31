@@ -205,7 +205,7 @@ class COGDetailView(APIView):
                     # @TODO add logging if it isn't COG
                     is_cog = False
             data_array = dataset.read()
-        
+
         if not is_cog:
             pass
 
