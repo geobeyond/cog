@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 import app.storage
+import uuid
 from django.db import migrations, models
 
 
@@ -17,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='COG',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.UUIDField(default=uuid.UUID('583e55f8-265e-472f-b112-59bdd038c08a'), editable=False, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('image', models.FileField(blank=True, null=True, storage=app.storage.MinioCogStorage(), upload_to='')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
