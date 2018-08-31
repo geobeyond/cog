@@ -14,13 +14,38 @@
 
 from cog.settings.base import *
 
-DEBUG = True
+if os.getenv('SECRET_KEY'):
+    SECRET_KEY = os.getenv('SECRET_KEY')
 
+DEBUG = bool(int(os.getenv('DEBUG', True)))
+
+if os.getenv('ALLOWED_HOSTS'):
+    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
+else:
+    ALLOWED_HOSTS = ['*']
+
+SQLITE = {
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+}
+
+PG = {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'HOST': os.getenv('POSTGRES_HOST'),
+    'PORT': os.getenv('POSTGRES_PORT'),
+    'USER': os.getenv('POSTGRES_USER'),
+    'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+    'NAME': os.getenv('POSTGRES_DB'),
+}
+
+if os.getenv("DOCKER", default=False):
+    DB = PG
+else:
+    DB = SQLITE
+
+# Database
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': DB
 }
 
 INSTALLED_APPS += (
@@ -35,9 +60,14 @@ STATIC_ROOT = './static_files/'
 
 DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
 STATICFILES_STORAGE = "minio_storage.storage.MinioStaticStorage"
-MINIO_STORAGE_ENDPOINT = 'localhost:9000'
-MINIO_STORAGE_ACCESS_KEY = 'geobeyond'
-MINIO_STORAGE_SECRET_KEY = 'geobeyond'
+if os.getenv("DOCKER", default=False):
+    MINIO_STORAGE_ENDPOINT = os.getenv("MINIO_STORAGE_ENDPOINT", "minio:9000")
+    MINIO_STORAGE_ACCESS_KEY = os.getenv("MINIO_STORAGE_ACCESS_KEY")
+    MINIO_STORAGE_SECRET_KEY = os.getenv("MINIO_STORAGE_SECRET_KEY")
+else:
+    MINIO_STORAGE_ENDPOINT = 'localhost:9000'
+    MINIO_STORAGE_ACCESS_KEY = 'geobeyond'
+    MINIO_STORAGE_SECRET_KEY = 'geobeyond'
 MINIO_STORAGE_USE_HTTPS = False
 MINIO_STORAGE_MEDIA_BUCKET_NAME = 'local-media'
 MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET = True
@@ -51,7 +81,10 @@ MINIO_STORAGE_AUTO_CREATE_STATIC_POLICY = True
 
 # COG
 MINIO_STORAGE_COG_BUCKET_NAME = "cog"
-MINIO_STORAGE_COG_URL = "http://localhost:9000"
+if os.getenv("DOCKER", default=False):
+    MINIO_STORAGE_COG_URL = os.getenv("MINIO_STORAGE_COG_URL")
+else:
+    MINIO_STORAGE_COG_URL = "http://localhost:9000"
 MINIO_STORAGE_AUTO_CREATE_COG_BUCKET = True
 MINIO_STORAGE_AUTO_CREATE_COG_POLICY = True
 MINIO_STORAGE_COG_USE_PRESIGNED = False
