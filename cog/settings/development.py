@@ -93,4 +93,4 @@ MINIO_STORAGE_COG_BACKUP_BUCKET = False
 
 # RASTERIO
 # It could be one of ycbcr,zstd,lzw,deflate,packbits,raw
-RASTERIO_COGEO_PROFILE = "ycbcr"
+RASTERIO_COGEO_PROFILE = "raw"
