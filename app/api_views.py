@@ -123,9 +123,8 @@ class COGListCreateView(APIView):
                     ci_file = File(dst)
                     ci_file.name = os.path.basename(ci_file.name)
                     cog = COG.objects.create(name=ci_file.name, image=ci_file)
-
-        if not cog_img:
-            cog = COG.objects.create(name=name, image=img)
+            else:
+                cog = COG.objects.create(name=name, image=img)
 
         cog.save()
         return Response(status=status.HTTP_201_CREATED)
