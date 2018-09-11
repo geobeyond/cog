@@ -63,6 +63,7 @@ class COGListCreateView(APIView):
                 -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
                 -F image=@/Users/geobart/example.tif \
                 -F name=example.tif
+                -F compression=raw
         """
 
         if 'image' not in request.data.keys():
@@ -70,6 +71,10 @@ class COGListCreateView(APIView):
 
         img = request.data['image']
         name = request.data['name']
+        if 'compression' in request.data.keys():
+            compression = request.data['compression']
+        else:
+            compression = RASTERIO_COGEO_PROFILE
 
         cog_img_name = "cog" + "_" + name
         f_name = COG.objects.filter(name=cog_img_name)
@@ -105,7 +110,7 @@ class COGListCreateView(APIView):
                 GDAL_TIFF_OVR_BLOCKSIZE=os.environ.get("GDAL_TIFF_OVR_BLOCKSIZE", block_size),
             )
             if not is_cog:
-                cog_profile = cog_profiles.get(RASTERIO_COGEO_PROFILE)
+                cog_profile = cog_profiles.get(compression)
                 cog_profile.update(dict(BIGTIFF=os.environ.get("BIGTIFF", "IF_SAFER")))
                 with MemoryFile(filename=cog_img_name) as dst:
                     with dst.open(**inpt_profile) as cog_img:
