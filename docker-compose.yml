@@ -6,7 +6,7 @@ services:
     env_file:
       - ./.env
       - ./.env.secret
-    command: python3 manage.py runserver 0.0.0.0:8000
+    command: gunicorn -b 0.0.0.0:8000 --env DJANGO_SETTINGS_MODULE=cog.settings.development cog.wsgi --timeout 120 --workers=3 --log-file /tmp/cog.log --log-level debug
     volumes:
       - .:/app
     ports:
