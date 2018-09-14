@@ -18,6 +18,7 @@ from . import views, api_views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^explorer', views.explorer, name='explorer'),
     url(
         r'^api/cogs/$',
         api_views.COGListCreateView.as_view(),

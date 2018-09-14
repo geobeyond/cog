@@ -23,6 +23,10 @@ def index(request):
     return render(request, 'index.html')
 
 
+def explorer(request):
+    return render(request, 'explorer.html')
+
+
 def health(request):
     state = {"status": "UP"}
     return JsonResponse(state)
