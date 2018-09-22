@@ -13,3 +13,5 @@ cog/__pycache__/
 cog/settings/__pycache__/
 
 app/migrations/__pycache__/
+
+*.log

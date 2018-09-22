@@ -1,0 +1,38 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-container
+  template:
+    metadata:
+      labels:
+        app: db-container
+        tier: backend
+    spec:
+      containers:
+        - name: db-container
+          image: postgres:10.3-alpine
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+
+            - name: POSTGRES_PASSWORD
+              value: cogsecret
+
+            - name: POSTGRES_DB
+              value: cogdb
+
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: db-volume-mount
+              mountPath: /var/lib/postgresql/data
+
+      volumes:
+        - name: db-volume-mount
+          persistentVolumeClaim:
+            claimName: db-pvc

@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: webapi-service
+spec:
+  selector:
+    app: webapi-container
+  ports:
+    - protocol: TCP
+      port: 8000
+      nodePort: 30800
+  type: NodePort
