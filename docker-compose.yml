@@ -28,8 +28,6 @@ services:
     restart: on-failure
     env_file:
       - ./.env.secret
-    # entrypoint: sh
-    # command: -c "mkdir -p /data/cog && /usr/bin/minio server /data"
     command: minio server /data
     ports:
       - "9001:9000"
