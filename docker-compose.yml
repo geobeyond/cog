@@ -34,6 +34,18 @@ services:
     volumes:
       - minio-data:/data
 
+  marblecutter-virtual:
+    image: geobeyond/marblecutter-virtual:latest
+    restart: on-failure
+    # command: gunicorn -k gevent -b 0.0.0.0 --access-logfile virtual.web:app
+    command: python server.py
+    ports:
+      - "8001:8000"
+    volumes:
+      - marblecutter-data:/opt/marblecutter/
+
+
 volumes:
   postgres-data:
   minio-data:
+  marblecutter-data:
