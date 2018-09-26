@@ -7,6 +7,8 @@ spec:
   selector:
     matchLabels:
       app: db-container
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -15,7 +17,7 @@ spec:
     spec:
       containers:
         - name: db-container
-          image: postgres:10.3-alpine
+          image: registry.eu-gb.bluemix.net/geoavalanche/postgres:latest
           env:
             - name: POSTGRES_USER
               value: postgres

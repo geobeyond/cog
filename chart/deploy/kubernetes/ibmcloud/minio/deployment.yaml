@@ -7,6 +7,8 @@ spec:
   selector:
     matchLabels:
       app: minio-container
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -15,7 +17,7 @@ spec:
     spec:
       containers:
         - name: minio-container
-          image: minio/minio
+          image: registry.eu-gb.bluemix.net/geoavalanche/minio:latest
           command: ["minio"]
           args: ["server", "/data"]
           env:
