@@ -18,7 +18,7 @@ spec:
         - name: webapi
           image: cog_webapi:latest
           command: ["/app/entrypoint.sh"]
-          args: ["-b", "0.0.0.0:8000", "--env", "DJANGO_SETTINGS_MODULE=cog.settings.development", "cog.wsgi", "--timeout", "120", "--workers=3", "--log-file", "/tmp/cog.log", "--log-level", "debug"]
+          args: ["gunicorn", "-b", "0.0.0.0:8000", "--env", "DJANGO_SETTINGS_MODULE=cog.settings.development", "cog.wsgi", "--timeout", "120", "--workers", "3", "--log-file", "/tmp/cog.log", "--log-level", "debug"]
           ports:
             - containerPort: 8000
           env:
