@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: db-container
-          image: registry.eu-gb.bluemix.net/geoavalanche/postgres:latest
+          image: registry.eu-de.bluemix.net/call4code/postgres:latest
           env:
             - name: POSTGRES_USER
               value: postgres
