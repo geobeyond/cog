@@ -1,4 +1,6 @@
 # COG
+[![](https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg)](https://bluemix.net)
+![Platform](https://img.shields.io/badge/platform-DJANGO-lightgrey.svg?style=flat)
 
 ## What is COG
 
@@ -8,9 +10,6 @@ bucket in order to serving out of the box from a generic and open source object 
 [![COG](http://www.cogeo.org/images/logo/Cog-02.png)](http://www.cogeo.org)
 
 The server has been developed in Django and has embedded [COG-Explorer](https://github.com/geotiffjs/cog-explorer/) a COG viewer built with [OpenLayers](http://openlayers.org/) and [geotiff.js](https://geotiffjs.github.io/).
-
-[![](https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg)](https://bluemix.net)
-![Platform](https://img.shields.io/badge/platform-DJANGO-lightgrey.svg?style=flat)
 
 ### Table of Contents
 * [Summary](#summary)
