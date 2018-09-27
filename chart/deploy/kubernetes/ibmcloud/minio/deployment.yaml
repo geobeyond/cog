@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: minio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minio-container
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: minio-container
+        tier: backend
+    spec:
+      containers:
+        - name: minio-container
+          image: registry.eu-de.bluemix.net/call4code/minio:latest
+          command: ["minio"]
+          args: ["server", "/data"]
+          env:
+            - name: MINIO_ACCESS_KEY
+              value: cogsecret
+
+            - name: MINIO_SECRET_KEY
+              value: cogsecret
+
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - name: minio-volume-mount
+              mountPath: /data
+
+      volumes:
+        - name: minio-volume-mount
+          persistentVolumeClaim:
+            claimName: minio-pvc

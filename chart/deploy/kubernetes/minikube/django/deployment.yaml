@@ -1,0 +1,59 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: webapi
+  labels:
+    app: webapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapi-container
+  template:
+    metadata:
+      labels:
+        app: webapi-container
+    spec:
+      containers:
+        - name: webapi
+          image: geobeyond/cog_webapi:latest
+          command: ["/app/entrypoint.sh"]
+          args: ["gunicorn", "-b", "0.0.0.0:8000", "--env", "DJANGO_SETTINGS_MODULE=cog.settings.development", "cog.wsgi", "--timeout", "120", "--workers", "3", "--log-file", "/tmp/cog.log", "--log-level", "debug"]
+          ports:
+            - containerPort: 8000
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+
+            - name: POSTGRES_PASSWORD
+              value: cogsecret
+
+            - name: POSTGRES_HOST
+              value: db-service
+
+            - name: POSTGRES_DB
+              value: cogdb
+
+            - name: MINIO_STORAGE_ACCESS_KEY
+              value: cogsecret
+
+            - name: MINIO_STORAGE_SECRET_KEY
+              value: cogsecret
+
+            - name: MINIO_STORAGE_ENDPOINT
+              value: "192.168.99.100:30900"
+
+            - name: MINIO_STORAGE_COG_URL
+              value: "http://192.168.99.100:30900"
+
+            - name: DJANGO_SETTINGS_MODULE
+              value: cog.settings.development
+
+            - name: ALLOWED_HOSTS
+              value: "*"
+
+            - name: DOCKER
+              value: "True"
+
+            - name: DEBUG
+              value: "1"
