@@ -213,15 +213,59 @@ X-Frame-Options: SAMEORIGIN
 <a name="enablement"></a>
 ### IBM Cloud Enablement
 
-All the components can be deployed into a Kubernetes cluster either [Minikube](https://kubernetes.io/docs/setup/minikube/) or IBM Cloud instance simply running few `kubectl` commands.
+All the components can be deployed into a Kubernetes cluster either [Minikube](https://kubernetes.io/docs/setup/minikube/) or IBM Cloud instance simply running few `kubectl` commands once your cluster is up and running.
 
 #### Minikube
 
+Move into the deployment scripts for Minikube:
 
+```shell
+cd chart/deploy/kubernetes/minikube
+```
+
+Assuming your Minikube settings configure the public ip address (i.e. `192.168.99.100`) and port of your Minio server into the file `django/deployment.yaml`
+
+```yaml
+- name: MINIO_STORAGE_ENDPOINT
+  value: "192.168.99.100:30900"
+
+- name: MINIO_STORAGE_COG_URL
+  value: "http://192.168.99.100:30900"
+```
+
+Launch the deployment:
+
+```
+kubectl apply -f minio
+kubectl apply -f postgres
+kubectl apply -f django
+```
 
 #### IBM Cloud k8s
 
+Move into the deployment scripts for Minikube:
 
+```shell
+cd chart/deploy/kubernetes/ibmcloud
+```
+
+Assuming your IBMCloud k8s cluster settings configure the public ip address (i.e. `159.122.186.33`) and port of your Minio server into the file `django/deployment.yaml`
+
+```yaml
+- name: MINIO_STORAGE_ENDPOINT
+  value: "159.122.186.33:30900"
+
+- name: MINIO_STORAGE_COG_URL
+  value: "http://159.122.186.33:30900"
+```
+
+Launch the deployment:
+
+```
+kubectl apply -f minio
+kubectl apply -f postgres
+kubectl apply -f django
+```
 
 <a name="requirements"></a>
 ### Requirements
