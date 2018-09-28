@@ -208,7 +208,7 @@ X-Frame-Options: SAMEORIGIN
 - Copy and paste the `resource_uri` of one returned GeoTIFF
 - Click the button `Load URL or sample`
 
-![COG-Explorer](cog/staticfiles/images/explorer.png)
+![COG-Explorer](staticfiles/images/explorer.png)
 
 <a name="enablement"></a>
 ### IBM Cloud Enablement
