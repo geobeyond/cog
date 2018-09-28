@@ -4,12 +4,12 @@
 
 ## What is COG
 
-It is a RESTful Web API for ingesting normal GeoTIFFs, converting to [Cloud Optimized GeoTIFF](http://www.cogeo.org/) and finally publishing them into a [Minio](https://www.minio.io/)
+COG is a RESTful Web API for ingesting normal GeoTIFFs, converting to [Cloud Optimized GeoTIFF](http://www.cogeo.org/) and finally publishing them into a [Minio](https://www.minio.io/)
 bucket in order to serving out of the box from a generic and open source object storage server.
 
 [![COG](http://www.cogeo.org/images/logo/Cog-02.png)](http://www.cogeo.org)
 
-The server has been developed in Django and has embedded [COG-Explorer](https://github.com/geotiffjs/cog-explorer/) a COG viewer built with [OpenLayers](http://openlayers.org/) and [geotiff.js](https://geotiffjs.github.io/).
+The server has been developed in Django and has embedded [COG-Explorer](https://github.com/geotiffjs/cog-explorer/) a COG viewer built with [OpenLayers](http://openlayers.org/), [geotiff.js](https://geotiffjs.github.io/) and [React](https://reactjs.org/).
 
 ### Table of Contents
 * [Summary](#summary)
@@ -21,12 +21,13 @@ The server has been developed in Django and has embedded [COG-Explorer](https://
 
 <a name="summary"></a>
 ### Summary
-The Web basic starter contains an opinionated set of files for web serving:
+The architecture of COG is composed by the following components for web serving
+geotiff files out of an object storage bucket once they are converted into the
+cloud optimized format:
 
-- `app/templates/index.html`
-- `staticfiles/js/bundle.js`
-- `staticfiles/css/default.css`
-
+- `A REST API for COG objects` built with [**Django Rest Framework**](https://www.django-rest-framework.org/)
+- `A web mapping viewer for COGs` built with [**React**](https://reactjs.org/) and [**OpenLayers**](http://openlayers.org/)
+- `A bucket storage server for COGs` built with [**Minio**](https://www.minio.io/)
 
 
 <a name="enablement"></a>
@@ -40,7 +41,7 @@ The Web basic starter contains an opinionated set of files for web serving:
 
 #### IBM Cloud development tools setup (optional)
 
-1. Install [IBM Cloud Developer Tools](https://console.bluemix.net/docs/cli/idt/setting_up_idt.html#add-cli) on your machine  
+1. Install [IBM Cloud Developer Tools](https://console.bluemix.net/docs/cli/idt/setting_up_idt.html#add-cli) on your machine
 2. Install the plugin with: `bx plugin install dev -r bluemix`
 
 
