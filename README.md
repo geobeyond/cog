@@ -25,9 +25,9 @@ The architecture of COG is composed by the following components for web serving
 geotiff files out of an object storage bucket once they are converted into the
 cloud optimized format:
 
-- `A REST API for COG objects` built with [**Django Rest Framework**](https://www.django-rest-framework.org/)
-- `A web mapping viewer for COGs` built with [**React**](https://reactjs.org/) and [**OpenLayers**](http://openlayers.org/)
-- `A bucket storage server for COGs` built with [**Minio**](https://www.minio.io/)
+- *A REST API for COG objects* built with [**Django Rest Framework**](https://www.django-rest-framework.org/)
+- *A web mapping viewer for COGs* built with [**React**](https://reactjs.org/) and [**OpenLayers**](http://openlayers.org/)
+- *A bucket storage server for COGs* built with [**Minio**](https://www.minio.io/)
 
 
 <a name="enablement"></a>
