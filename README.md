@@ -51,7 +51,7 @@ it as described in the following paragraphs.
 
 The operation needs an authorization header with a Basic Authentication from an administrator
 
-**HTTP POST Request**
+*HTTP POST Request*
 
 ```
 curl -X POST \
@@ -84,7 +84,7 @@ X-Frame-Options: SAMEORIGIN
 
 #### View all GeoTIFFs
 
-**HTTP GET Request**
+*HTTP GET Request*
 
 ```
 curl -X GET \
@@ -93,7 +93,7 @@ curl -X GET \
 
 and you might expect such response:
 
-**HTTP Response**
+*HTTP Response*
 
 ```json
 HTTP/1.1 200 OK
@@ -145,7 +145,7 @@ X-Frame-Options: SAMEORIGIN
 
 #### View a specific GeoTIFFs
 
-**HTTP GET Request**
+*HTTP GET Request*
 
 ```
 curl -X GET \
@@ -154,7 +154,7 @@ curl -X GET \
 
 and you might expect such response:
 
-**HTTP Response**
+*HTTP Response*
 
 ```json
 HTTP/1.1 200 OK
@@ -180,7 +180,7 @@ X-Frame-Options: SAMEORIGIN
 
 #### Delete a specific GeoTIFFs
 
-**HTTP GET Request**
+*HTTP GET Request*
 
 ```
 curl -X DELETE \
@@ -189,7 +189,7 @@ curl -X DELETE \
 
 and you might expect such response:
 
-**HTTP Response**
+*HTTP Response*
 
 ```json
 HTTP/1.1 204 No Content
