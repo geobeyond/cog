@@ -1,6 +1,7 @@
 # COG
-[![](https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg)](https://bluemix.net)
-![Platform](https://img.shields.io/badge/platform-DJANGO-lightgrey.svg?style=flat)
+
+[![bluemix](https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg)](https://bluemix.net)
+[![Platform](https://www.djangoproject.com/)](https://img.shields.io/badge/platform-DJANGO-lightgrey.svg?style=flat)
 
 ## What is COG
 
@@ -12,6 +13,7 @@ bucket in order to serving out of the box from a generic and open source object 
 The server has been developed in Django and has embedded [COG-Explorer](https://github.com/geotiffjs/cog-explorer/) a COG viewer built with [OpenLayers](http://openlayers.org/), [geotiff.js](https://geotiffjs.github.io/) and [React](https://reactjs.org/).
 
 ### Table of Contents
+
 * [Summary](#summary)
 * [How To Use](#howtouse)
 * [IBM Cloud Enablement](#enablement)
@@ -22,25 +24,28 @@ The server has been developed in Django and has embedded [COG-Explorer](https://
 * [License](#license)
 
 <a name="summary"></a>
+
 ### Summary
+
 The architecture of COG is composed by the following components for web serving
 geotiff files out of an object storage bucket once they are converted into the
 cloud optimized format:
 
-- *A REST API for COG objects* built with [**Django Rest Framework**](https://www.django-rest-framework.org/)
-- *A database for objects information* built with [**PostgreSQL]()
-- *A web mapping viewer for COGs* built with [**React**](https://reactjs.org/) and [**OpenLayers**](http://openlayers.org/)
-- *A bucket storage server for COGs* built with [**Minio**](https://www.minio.io/)
+* *A REST API for COG objects* built with [**Django Rest Framework**](https://www.django-rest-framework.org/)
+* *A database for objects information* built with [**PostgreSQL]()
+* *A web mapping viewer for COGs* built with [**React**](https://reactjs.org/) and [**OpenLayers**](http://openlayers.org/)
+* *A bucket storage server for COGs* built with [**Minio**](https://www.minio.io/)
 
 <a name="howtouse"></a>
+
 ### How To Use
 
 Allowed actions for now are:
 
-- *View all available COG-ready GeoTIFFs*
-- *View a COG-ready GeoTIFF resource*
-- *Upload a GeoTIFF and publish it as a COG*
-- *Delete a COG-ready GeoTIFF resource*
+* *View all available COG-ready GeoTIFFs*
+* *View a COG-ready GeoTIFF resource*
+* *Upload a GeoTIFF and publish it as a COG*
+* *Delete a COG-ready GeoTIFF resource*
 
 Assuming you have a normal GeoTIFF image called `my-awesome-image.tif` then you can ingest and exploit
 it as described in the following paragraphs.
@@ -51,9 +56,9 @@ it as described in the following paragraphs.
 
 The operation needs an authorization header with a Basic Authentication from an administrator
 
-*HTTP POST Request*
+##### HTTP POST Request
 
-```
+```bash
 curl -X POST \
     http://159.122.186.33:30800/api/cogs/ \
     -H 'Authorization: Basic YWRtaW46YWRtaW4=' \
@@ -68,9 +73,9 @@ curl -X POST \
 
 and you might expect such response:
 
-**HTTP Response**
+##### HTTP Response
 
-```
+```bash
 HTTP/1.1 201 Created
 
 Allow: GET,POST,HEAD,OPTIONS
@@ -84,16 +89,16 @@ X-Frame-Options: SAMEORIGIN
 
 #### View all GeoTIFFs
 
-*HTTP GET Request*
+##### HTTP GET Request
 
-```
+```bash
 curl -X GET \
     http://159.122.186.33:30800/api/cogs/
 ```
 
 and you might expect such response:
 
-*HTTP Response*
+##### HTTP Response
 
 ```json
 HTTP/1.1 200 OK
@@ -145,16 +150,16 @@ X-Frame-Options: SAMEORIGIN
 
 #### View a specific GeoTIFFs
 
-*HTTP GET Request*
+##### HTTP GET Request
 
-```
+```bash
 curl -X GET \
     http://159.122.186.33:30800/api/cogs/486db87e-0758-4e1e-9d60-acb25e8402f4
 ```
 
 and you might expect such response:
 
-*HTTP Response*
+##### HTTP Response
 
 ```json
 HTTP/1.1 200 OK
@@ -180,16 +185,16 @@ X-Frame-Options: SAMEORIGIN
 
 #### Delete a specific GeoTIFFs
 
-*HTTP GET Request*
+##### HTTP GET Request
 
-```
+```bash
 curl -X DELETE \
     http://159.122.186.33:30800/api/cogs/486db87e-0758-4e1e-9d60-acb25e8402f4/
 ```
 
 and you might expect such response:
 
-*HTTP Response*
+##### HTTP Response
 
 ```json
 HTTP/1.1 204 No Content
@@ -204,13 +209,14 @@ X-Frame-Options: SAMEORIGIN
 
 #### Explore GeoTIFFs from a web mapping viewer
 
-- Open the browser at the following location `/explorer` of your server (i.e. [http://159.122.186.33:30800/explorer](http://159.122.186.33:30800/explorer))
-- Copy and paste the `resource_uri` of one returned GeoTIFF
-- Click the button `Load URL or sample`
+* Open the browser at the following location `/explorer` of your server (i.e. [http://159.122.186.33:30800/explorer](http://159.122.186.33:30800/explorer))
+* Copy and paste the `resource_uri` of one returned GeoTIFF
+* Click the button `Load URL or sample`
 
 ![COG-Explorer](staticfiles/images/explorer.PNG)
 
 <a name="enablement"></a>
+
 ### IBM Cloud Enablement
 
 All the components can be deployed into a Kubernetes cluster either [Minikube](https://kubernetes.io/docs/setup/minikube/) or IBM Cloud instance simply running few `kubectl` commands once your cluster is up and running.
@@ -219,7 +225,7 @@ All the components can be deployed into a Kubernetes cluster either [Minikube](h
 
 Move into the deployment scripts for Minikube:
 
-```shell
+```bash
 cd chart/deploy/kubernetes/minikube
 ```
 
@@ -235,7 +241,7 @@ Assuming your Minikube settings configure the public ip address (i.e. `192.168.9
 
 Launch the deployment:
 
-```
+```bash
 kubectl apply -f minio
 kubectl apply -f postgres
 kubectl apply -f django
@@ -245,7 +251,7 @@ kubectl apply -f django
 
 Move into the deployment scripts for Minikube:
 
-```shell
+```bash
 cd chart/deploy/kubernetes/ibmcloud
 ```
 
@@ -261,23 +267,24 @@ Assuming your IBMCloud k8s cluster settings configure the public ip address (i.e
 
 Launch the deployment:
 
-```
+```bash
 kubectl apply -f minio
 kubectl apply -f postgres
 kubectl apply -f django
 ```
 
 <a name="requirements"></a>
+
 ### Requirements
+
 #### Local Development Tools Setup (optional)
 
-- If you don't already have it, install [Python](https://www.python.org/downloads/)
+* If you don't already have it, install [Python](https://www.python.org/downloads/)
 
 #### IBM Cloud development tools setup (optional)
 
 1. Install [IBM Cloud Developer Tools](https://console.bluemix.net/docs/cli/idt/setting_up_idt.html#add-cli) on your machine
 2. Install the plugin with: `bx plugin install dev -r bluemix`
-
 
 #### IBM Cloud DevOps setup (optional)
 
@@ -287,9 +294,8 @@ kubectl apply -f django
 
 ***Note** you must publish your project to [Github](https://github.com/) for this to work.
 
-
-
 <a name="configuration"></a>
+
 ### Configuration
 
 The project contains IBM Cloud specific files that are used to deploy the application as part of an IBM Cloud DevOps flow. The `.bluemix` directory contains files used to define the IBM Cloud toolchain and pipeline for your application. The `manifest.yml` file specifies the name of your application in IBM Cloud, the timeout value during deployment, and which services to bind to.
@@ -298,7 +304,9 @@ Credentials are either taken from the VCAP_SERVICES environment variable if in I
 
 
 <a name="run"></a>
+
 ### Run
+
 #### Using IBM Cloud development CLI
 The IBM Cloud development plugin makes it easy to compile and run your application if you do not have all of the tools installed on your computer yet. Your application will be compiled with Docker containers. To compile and run your app, run:
 
@@ -307,32 +315,33 @@ bx dev build
 bx dev run
 ```
 
-
 #### Using your local development environment
-
-
 
 ##### Endpoints
 
 Your application is running at: `http://localhost:3000/` in your browser.
 
-- Health endpoint: `/health`
-
-
+* Health endpoint: `/health`
 
 <a name="debug"></a>
+
 ### Debug
 
 #### Using IBM Cloud development CLI
+
 To build and debug your app, run:
+
 ```bash
 bx dev build --debug
 bx dev debug
 ```
+
 #### Using your local development environment
+
 To debug a `django` project run `python manage.py runserver` with DEBUG set to True in settings.py to start a native django development server. This comes with the Django's stack-trace debugger, which will present runtime failure stack-traces. For more information, see [Django's documentation](https://docs.djangoproject.com/en/2.0/ref/settings/).
 
 <a name="license"></a>
+
 ### License
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg?longCache=true&style=for-the-badge)](https://opensource.org/licenses/Apache-2.0)
