@@ -30,11 +30,11 @@ RUN apk --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/ed
 RUN apk --update add --virtual build-dependencies gcc musl-dev libffi-dev python3-dev build-base \
 # ISSUE https://github.com/Stanback/alpine-strongswan-vpn/pull/3
 # TODO workaround start see https://github.com/pyca/cryptography/issues/4264
-  && apk del libressl-dev \
-  && apk add openssl-dev \
-  && pip3 install cryptography==2.2.2 \
-  && apk del openssl-dev \
-  && apk add libressl-dev \
+# && apk del libressl-dev \
+# && apk add openssl-dev \
+# && pip3 install cryptography==2.2.2 \
+# && apk del openssl-dev \
+# && apk add libressl-dev \
 # TODO workaround end
   && apk add postgresql-dev \
   && pip3 install --upgrade pip \
