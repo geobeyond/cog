@@ -1,5 +1,11 @@
-Django==1.11.8
-gunicorn==19.7.1
-whitenoise==3.3.1
+Django==1.11.20
+gunicorn
+whitenoise
 ibmcloudenv
 livereload
+djangorestframework
+rasterio
+django-minio-storage
+psycopg2-binary
+django-cors-headers
+rio-cogeo==1.0.dev9
