@@ -9,18 +9,18 @@ python_version = '3.6.2'
 [dev-packages]
 ipdb = "*"
 "flake8" = "*"
+ptvsd = "*"
 
 [packages]
 livereload ='*'
 ibmcloudenv ='~=0.0'
-gunicorn = "==19.7.1"
-whitenoise= "==3.3.1"
+whitenoise = "*"
+gunicorn = "*"
 djangorestframework = "*"
 rasterio = "*"
 pillow = "*"
 django-minio-storage = "*"
 "psycopg2-binary" = "*"
-ptvsd = "*"
 django-cors-headers = "*"
 rio-cogeo = "==1.0.dev9"
 django = "==1.11.20"
