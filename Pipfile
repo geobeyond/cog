@@ -13,7 +13,6 @@ ipdb = "*"
 [packages]
 livereload ='*'
 ibmcloudenv ='~=0.0'
-Django = "==1.11.8"
 gunicorn = "==19.7.1"
 whitenoise= "==3.3.1"
 djangorestframework = "*"
@@ -21,6 +20,7 @@ rasterio = "*"
 pillow = "*"
 django-minio-storage = "*"
 "psycopg2-binary" = "*"
-rio-cogeo = "==1.0dev6"
 ptvsd = "*"
 django-cors-headers = "*"
+rio-cogeo = "==1.0.dev9"
+django = "==1.11.20"
