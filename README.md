@@ -1,7 +1,7 @@
 # COG
 
 [![bluemix](https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg)](https://bluemix.net)
-[![Platform](https://www.djangoproject.com/)](https://img.shields.io/badge/platform-DJANGO-lightgrey.svg?style=flat)
+[![Platform](https://img.shields.io/badge/platform-DJANGO-lightgrey.svg?style=flat)](https://www.djangoproject.com/)
 
 ## What is COG
 
@@ -32,7 +32,7 @@ geotiff files out of an object storage bucket once they are converted into the
 cloud optimized format:
 
 * *A REST API for COG objects* built with [**Django Rest Framework**](https://www.django-rest-framework.org/)
-* *A database for objects information* built with [**PostgreSQL]()
+* *A database for objects information* built with [**PostgreSQL**](https://www.postgresql.org/)
 * *A web mapping viewer for COGs* built with [**React**](https://reactjs.org/) and [**OpenLayers**](http://openlayers.org/)
 * *A bucket storage server for COGs* built with [**Minio**](https://www.minio.io/)
 
